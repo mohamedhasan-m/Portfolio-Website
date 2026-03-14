@@ -22,7 +22,7 @@ const education: EducationItem[] = [
     degree: 'B.E - Computer Science & Engineering',
     institution: 'Aalim Muhammed Salegh College of Engineering',
     duration: '2023 - 2027',
-    grade: 'CGPA: 8.15/10.0',
+    grade: 'CGPA: 8.04/10.0',
     status: 'current'
   },
   {
