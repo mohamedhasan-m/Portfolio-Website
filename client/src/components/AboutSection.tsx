@@ -45,7 +45,7 @@ export const AboutSection = () => {
                     <GraduationCap className="h-5 w-5 text-primary" />
                     <h4 className="font-semibold text-foreground">Education</h4>
                   </div>
-                  <p className="text-muted-foreground">B.E CSE (8.15 CGPA)</p>
+                  <p className="text-muted-foreground">B.E CSE (8.04 CGPA)</p>
                 </CardContent>
               </Card>
 
