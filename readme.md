@@ -61,7 +61,7 @@ Built with **React, Express, and PostgreSQL** for a smooth, responsive, and anim
 |-------------------|-------------|
 | **Dev Server**    | Vite HMR for frontend, `tsx` for backend |
 | **Build Process** | Vite (frontend) + esbuild (backend) |
-| **Environment**   | `.env` for secrets (DB URL, etc.) |
+| **Environment**   | No required environment variables for local development (`PORT` is optional and defaults to `5000`) |
 | **Tooling**       | TypeScript, custom path aliases, error overlays |
 
 ---
@@ -79,15 +79,23 @@ Built with **React, Express, and PostgreSQL** for a smooth, responsive, and anim
 
 ```bash
 # Clone repo
-git clone https://github.com/mohamedhasan-coder/portfolio.git
-cd portfolio
+git clone https://github.com/mohamedhasan-m/Portfolio-Website.git
+cd Portfolio-Website
 
 # Install dependencies
 npm install
 
-# Start dev servers
-npm run dev  # frontend
-npm run dev:server  # backend
+# Start development server (frontend + backend)
+npm run dev
+
+# Type-check
+npm run check
+
+# Production build
+npm run build
+
+# Start production server (after build)
+npm run start
 ```
 ## 📬 Contact  
 

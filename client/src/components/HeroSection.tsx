@@ -90,25 +90,28 @@ export const HeroSection = () => {
             <div className="flex space-x-6 text-2xl">
               <a 
                 href="https://github.com/mohamedhasan-coder" 
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Visit Mohamed Hasan's GitHub profile"
                 data-testid="github-link"
               >
                 <Github className="h-6 w-6" />
               </a>
               <a 
                 href="https://www.linkedin.com/in/mohamed-hasan-m-325051362/" 
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Visit Mohamed Hasan's LinkedIn profile"
                 data-testid="linkedin-link"
               >
                 <Linkedin className="h-6 w-6" />
               </a>
               <a 
                 href="mailto:mohamedhasan8403@gmail.com" 
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                aria-label="Send an email to Mohamed Hasan"
                 data-testid="email-link"
               >
                 <Mail className="h-6 w-6" />
@@ -125,7 +128,7 @@ export const HeroSection = () => {
               data-testid="hero-gif"
               />
               <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground p-4 rounded-full shadow-lg">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </div>

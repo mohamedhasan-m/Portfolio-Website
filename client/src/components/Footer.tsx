@@ -20,28 +20,28 @@ export const Footer = () => {
           <div className="flex space-x-6">
             <button 
               onClick={() => scrollToSection('home')}
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="text-muted-foreground hover:text-primary transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               data-testid="footer-home"
             >
               Home
             </button>
             <button 
               onClick={() => scrollToSection('about')}
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="text-muted-foreground hover:text-primary transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               data-testid="footer-about"
             >
               About
             </button>
             <button 
               onClick={() => scrollToSection('projects')}
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="text-muted-foreground hover:text-primary transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               data-testid="footer-projects"
             >
               Projects
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="text-muted-foreground hover:text-primary transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               data-testid="footer-contact"
             >
               Contact

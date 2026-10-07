@@ -10,6 +10,14 @@ import { Footer } from '@/components/Footer';
 
 export default function Home() {
   useEffect(() => {
+    const elements = Array.from(document.querySelectorAll('.animate-on-scroll'));
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      elements.forEach((el) => el.classList.add('visible'));
+      return;
+    }
+
     // Scroll Animation Observer
     const observerOptions = {
       threshold: 0.1,
@@ -24,7 +32,6 @@ export default function Home() {
       });
     }, observerOptions);
 
-    const elements = document.querySelectorAll('.animate-on-scroll');
     elements.forEach(el => observer.observe(el));
 
     return () => {
