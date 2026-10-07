@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { contactSchema } from '@shared/schema';
 
 export const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -26,22 +27,45 @@ export const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const validationResult = contactSchema.safeParse(formData);
+    if (!validationResult.success) {
+      const [firstError] = validationResult.error.issues;
+      toast({
+        title: "Invalid form data",
+        description: firstError?.message ?? "Please review your input and try again.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(validationResult.data),
+      });
+
+      const responseData = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(responseData.message || 'Failed to send message');
+      }
+
       toast({
         title: "Message sent successfully!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
+        description: responseData.message || "Thank you for reaching out. I'll get back to you soon.",
       });
       
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Please try again or contact me directly via email.";
       toast({
         title: "Error sending message",
-        description: "Please try again or contact me directly via email.",
+        description: errorMessage,
         variant: "destructive"
       });
     } finally {
@@ -156,6 +180,8 @@ export const ContactSection = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
+                        minLength={2}
+                        maxLength={100}
                         data-testid="input-name"
                       />
                     </div>
@@ -171,6 +197,7 @@ export const ContactSection = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
+                        maxLength={254}
                         data-testid="input-email"
                       />
                     </div>
@@ -186,6 +213,8 @@ export const ContactSection = () => {
                         value={formData.message}
                         onChange={handleInputChange}
                         required
+                        minLength={10}
+                        maxLength={2000}
                         data-testid="input-message"
                       />
                     </div>

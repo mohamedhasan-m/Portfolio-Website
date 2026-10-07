@@ -2,43 +2,7 @@ import { Github, ExternalLink } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import walmart from '@assets/Walmart-clone.png'
-
-interface Project {
-  title: string;
-  description: string;
-  image: string;
-  technologies: string[];
-  githubUrl?: string;
-  liveUrl?: string;
-  status?: 'completed' | 'in-progress';
-}
-
-const projects: Project[] = [
-  {
-    title: 'Responsive Music Website',
-    description: 'A fully responsive front-end music website built with HTML and CSS, optimized for all devices with clean, intuitive design.',
-    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
-    technologies: ['HTML', 'CSS', 'Responsive'],
-    githubUrl: 'https://github.com/mohamedhasan-coder/Responsive-Music-Website.git',
-    status: 'completed'
-  },
-  {
-    title: 'Walmart Clone',
-    description: 'Modern e-commerce website clone of Walmart with interactive shopping features, product browsing, and seamless user experience across all devices.',
-    image: walmart,
-    technologies: ['HTML', 'CSS', 'JavaScript'],
-    githubUrl: 'https://github.com/mohamedhasan-coder/Walmart-Clone.git',
-    status: 'completed'
-  },
-  {
-    title: 'Full Stack E-Commerce',
-    description: 'Complete e-commerce solution with Spring Boot backend, React frontend, and integrated payment processing. Currently in development phase.',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
-    technologies: ['Spring Boot', 'React', 'MySQL'],
-    status: 'in-progress'
-  }
-];
+import { projects } from '@/data/projects';
 
 export const ProjectsSection = () => {
   return (
@@ -56,7 +20,7 @@ export const ProjectsSection = () => {
             <Card key={project.title} className="card-hover animate-on-scroll overflow-hidden" data-testid={`project-${project.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}>
               <img 
                 src={project.image} 
-                alt={`${project.title} interface`} 
+                alt={`${project.title} project preview`} 
                 className="w-full h-48 object-cover"
                 loading="lazy"
               />
@@ -75,7 +39,13 @@ export const ProjectsSection = () => {
                             asChild
                             data-testid={`github-${project.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
                           >
-                            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                            <a
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`Open ${project.title} source code on GitHub`}
+                              className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                            >
                               <Github className="h-4 w-4" />
                             </a>
                           </Button>
@@ -87,7 +57,13 @@ export const ProjectsSection = () => {
                             asChild
                             data-testid={`live-${project.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
                           >
-                            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                            <a
+                              href={project.liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`Open live demo for ${project.title}`}
+                              className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                            >
                               <ExternalLink className="h-4 w-4" />
                             </a>
                           </Button>

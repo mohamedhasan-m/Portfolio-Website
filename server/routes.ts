@@ -1,20 +1,15 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
 import path from "path";
-import { fileURLToPath } from "url"; // <-- ADD THIS IMPORT
+import { fileURLToPath } from "url";
+import { contactSchema } from "@shared/schema";
 
-// --- ADD THESE TWO LINES TO FIX '__dirname is not defined' ---
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // --- CORRECTED RESUME DOWNLOAD ROUTE ---
- // In server/routes.ts
-
 app.get("/api/resume/download", async (req, res) => {
   try {
-    // UPDATED to use the new, simpler filename
     const correctFilename = "Mohamed_Hasan_Resume.pdf";
 
     const resumePath = path.join(__dirname, "..", "attached_assets", correctFilename);
@@ -35,14 +30,34 @@ app.get("/api/resume/download", async (req, res) => {
   }
 });
 
-  // --- UNCHANGED CONTACT FORM ROUTE ---
   app.post("/api/contact", async (req, res) => {
     try {
-      const { name, email, message } = req.body;
-      if (!name || !email || !message) {
-        return res.status(400).json({ message: "All fields are required" });
+      const validationResult = contactSchema.safeParse(req.body);
+
+      if (!validationResult.success) {
+        return res.status(400).json({
+          message: "Invalid contact form data",
+          errors: validationResult.error.flatten().fieldErrors,
+        });
       }
-      console.log('Contact form submission:', { name, email, message });
+
+      const { name, email, message } = validationResult.data;
+      const emailDomain = email.includes("@") ? email.split("@")[1] : "unknown";
+
+      if (process.env.NODE_ENV === "production") {
+        console.log("Contact form submission metadata:", {
+          nameLength: name.length,
+          emailDomain,
+          messageLength: message.length,
+        });
+      } else {
+        console.log("Contact form submission metadata:", {
+          name,
+          email,
+          messageLength: message.length,
+        });
+      }
+
       res.json({ message: "Message sent successfully" });
     } catch (error) {
       console.error('Contact form error:', error);
